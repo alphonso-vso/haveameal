@@ -32,5 +32,9 @@ class DatabaseSeeder extends Seeder
 
         // Assign role
         $userSA->assignRole($roleSA);
+
+        $this->call([
+            MealTimeSeeder::class,
+        ]);
     }
 }
