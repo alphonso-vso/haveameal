@@ -8,9 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Meal extends Model
 {
     use HasFactory;
+    protected $fillable = ['name', 'ingredients', 'meal_time_id', 'price'];
 
     public function mealTime()
     {
-        return $this->hasMany(\App\Models\MealTime::class);
+        return $this->hasOne(\App\Models\MealTime::class);
     }
 }

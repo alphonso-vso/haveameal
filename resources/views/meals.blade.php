@@ -1,5 +1,5 @@
 <x-app-layout>
     <div class="">
-        <x-welcome />
+        <livewire:meals />
     </div>
 </x-app-layout>
