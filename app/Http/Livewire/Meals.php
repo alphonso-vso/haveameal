@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Meal;
+use App\Models\MealTime;
 use Livewire\WithPagination;
 
 class Meals extends Component
@@ -12,6 +13,20 @@ class Meals extends Component
 
     public $search = '';
     public $confirmingMealDeletion = false;
+    public $confirmingMealAdd = false;
+    public array $meal_times;
+    public $meal;
+
+    protected $rules = [
+        'meal.name' => 'required|string|min:3',
+        'meal.ingredients' => 'string',
+        'meal.meal_time_id' => 'required|numeric',
+        'meal.price' => 'required|numeric'
+    ];
+
+    public function mount() {
+        $this->meal_times = MealTime::pluck("name", "id")->toArray();
+    }
 
     public function updatingSearch()
     {
@@ -33,7 +48,6 @@ class Meals extends Component
 
     public function confirmMealDeletion($id)
     {
-        //$meal->delete();
         $this->confirmingMealDeletion = $id;
     }
 
@@ -41,5 +55,38 @@ class Meals extends Component
     {
         $meal->delete();
         $this->confirmingMealDeletion = false;
+    }
+
+    public function confirmMealAdd()
+    {
+        $this->reset(['meal']);
+        $this->confirmingMealAdd = true;
+    }
+
+    public function saveMeal()
+    {
+        $this->validate();
+
+        if (isset($this->meal->id))
+        {
+            $this->meal->save();
+        }
+        else
+        {
+            Meal::create([
+                'name' => $this->meal['name'],
+                'ingredients' => $this->meal['ingredients'],
+                'meal_time_id' => $this->meal['meal_time_id'],
+                'price' => $this->meal['price'],
+            ]);
+        }
+
+        $this->confirmingMealAdd = false;
+    }
+
+    public function confirmMealEdit(Meal $meal)
+    {
+        $this->meal = $meal;
+        $this->confirmingMealAdd = true;
     }
 }

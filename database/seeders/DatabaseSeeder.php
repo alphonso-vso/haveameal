@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         // Create SA Role
-        $roleSA = Role::create(['name' => 'Super Admin']);
+        $roleSA = Role::create(['name' => 'super-admin']);
 
         // Create SA User
         $userSA = User::factory()->create([
