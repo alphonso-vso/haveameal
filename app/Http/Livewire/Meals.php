@@ -55,6 +55,7 @@ class Meals extends Component
     {
         $meal->delete();
         $this->confirmingMealDeletion = false;
+        session()->flash('message', 'Comida eliminada con exito');
     }
 
     public function confirmMealAdd()
@@ -70,6 +71,7 @@ class Meals extends Component
         if (isset($this->meal->id))
         {
             $this->meal->save();
+            session()->flash('message', 'Comida actualizada con exito');
         }
         else
         {
@@ -79,6 +81,7 @@ class Meals extends Component
                 'meal_time_id' => $this->meal['meal_time_id'],
                 'price' => $this->meal['price'],
             ]);
+            session()->flash('message', 'Comida guardada con exito');
         }
 
         $this->confirmingMealAdd = false;

@@ -11,12 +11,12 @@
         </span>
     </div>
     @endif
-    <div>
+    <!-- <div>
         <div class="mt-1 mb-2 flex rounded-md shadow-sm">
             <input type="search" wire:model="search" name="search" id="search" class="block flex-1 rounded-none rounded-r-md rounded-l-md border-gray-300 focus:border-orange-500 focus:ring-orange-500 sm:text-sm mr-4" placeholder="Buscar">
             <button wire:click="confirmMealAdd" class="text-blue-500 hover:text-blue-700 mr-4 transition ease-in-out duration-150">{{ __('Agregar') }}</button>
         </div>
-    </div>
+    </div> -->
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -25,13 +25,7 @@
                         {{ __('Nombre') }}
                     </th>
                     <th scope="col" class="px-6 py-3 uppercase">
-                        {{ __('Ingredientes') }}
-                    </th>
-                    <th scope="col" class="px-6 py-3 uppercase">
-                        {{ __('Precio') }}
-                    </th>
-                    <th scope="col" class="px-6 py-3 uppercase">
-                        {{ __('Tiempo') }}
+                        {{ __('Correo electrónico') }}
                     </th>
                     @role('super-admin')
                     <th scope="col" class="px-6 py-3 uppercase">
@@ -41,26 +35,26 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($meals as $meal)
-                <tr class="odd:bg-white even:bg-gray-100 bg-white border-b hover:bg-gray-100">
-                    <td class="px-6 py-3">{{ $meal->name }}</td>
-                    <td class="px-6 py-3">{{ $meal->ingredients }}</td>
-                    <td class="px-6 py-3">₡{{ $meal->price }}</td>
-                    <td class="px-6 py-3">{{ $meal->meal_time }}</td>
-                    @role('super-admin')
-                    <td class="px-6 py-3">
-                        <a wire:click="confirmMealEdit({{ $meal->id }})" class="text-blue-500 hover:text-blue-700 mr-4 transition ease-in-out duration-150" href="#">{{ __('Actualizar') }}</a>
-                        <x-danger-button wire:click="confirmMealDeletion({{ $meal->id }})" wire:loading.attr="disabled">
-                            {{ __('Eliminar') }}
-                        </x-danger-button>
-                    </td>
-                    @endrole
-                </tr>
+                @foreach($users as $user)
+                    @if ($user->id !== 1)
+                    <tr class="odd:bg-white even:bg-gray-100 bg-white border-b hover:bg-gray-100">
+                        <td class="px-6 py-3">{{ $user->name }}</td>
+                        <td class="px-6 py-3">{{ $user->email }}</td>
+                        @role('super-admin')
+                        <td class="px-6 py-3">
+                            <a wire:click="confirmUserEdit({{ $user->id }})" class="text-blue-500 hover:text-blue-700 mr-4 transition ease-in-out duration-150" href="#">{{ __('Actualizar') }}</a>
+                            <x-danger-button wire:click="confirmUserDeletion({{ $user->id }})" wire:loading.attr="disabled">
+                                {{ __('Eliminar') }}
+                            </x-danger-button>
+                        </td>
+                        @endrole
+                    </tr>
+                    @endif
                 @endforeach
             </tbody>
         </table>
         <div class="mt-4">
-            {{ $meals->links() }}
+            {{ $users->links() }}
         </div>
     </div>
     <div class="flex justify-center mt-16 px-0 sm:items-center sm:justify-between">
@@ -78,68 +72,51 @@
 
         </div>
     </div>
-    <!-- Delete Meal Confirmation Modal -->
-    <x-dialog-modal wire:model="confirmingMealDeletion">
+    <!-- Delete User Confirmation Modal -->
+    <x-dialog-modal wire:model="confirmingUserDeletion">
         <x-slot name="title">
-            {{ __('Eliminar comida') }}
+            {{ __('Eliminar usuario') }}
         </x-slot>
 
         <x-slot name="content">
-            {{ __('¿Estás seguro de eliminar esta comida? Una vez elimines esta comida todos sus datos se perderan.') }}
+            {{ __('¿Estás seguro de eliminar este usuario? Una vez elimines este usuario, todos sus datos se perderan.') }}
         </x-slot>
 
         <x-slot name="footer">
-            <x-secondary-button wire:click="$set('confirmingMealDeletion', false)" wire:loading.attr="disabled">
+            <x-secondary-button wire:click="$set('confirmingUserDeletion', false)" wire:loading.attr="disabled">
                 {{ __('Cancelar') }}
             </x-secondary-button>
 
-            <x-danger-button class="ml-3" wire:click="deleteMeal({{ $confirmingMealDeletion }})" wire:loading.attr="disabled">
+            <x-danger-button class="ml-3" wire:click="deleteUser({{ $confirmingUserDeletion }})" wire:loading.attr="disabled">
                 {{ __('Eliminar') }}
             </x-danger-button>
         </x-slot>
     </x-dialog-modal>
-    <!-- Add Meal Confirmation Modal -->
-    <x-dialog-modal wire:model="confirmingMealAdd">
+    <!-- Add User Confirmation Modal -->
+    <x-dialog-modal wire:model="confirmingUserAdd">
         <x-slot name="title">
-            {{ isset($this->meal->id) ? 'Editar comida' : 'Agregar comida' }}
+            {{ isset($this->user->id) ? 'Editar usuario' : 'Agregar usuario' }}
         </x-slot>
 
         <x-slot name="content">
             <div class="col-span-6 sm:col-span-4">
                 <x-label for="name" value="{{ __('Nombre') }}" />
-                <x-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="meal.name" />
+                <x-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="user.name" />
                 <x-input-error for="name" class="mt-2" />
             </div>
             <div class="col-span-6 sm:col-span-4">
-                <x-label for="ingredients" value="{{ __('Ingredientes') }}" />
-                <x-input id="ingredients" type="text" class="mt-1 block w-full" wire:model.defer="meal.ingredients" />
-                <x-input-error for="ingredients" class="mt-2" />
-            </div>
-            <div class="col-span-6 sm:col-span-4">
-                <x-label for="meal_time_id" value="{{ __('Tiempo de comida') }}" />
-                <select wire:model.defer="meal.meal_time_id" id="meal_time_id" class="mt-1 block w-full border-gray-300 focus:border-orange-500 focus:ring-orange-500 rounded-md shadow-sm">
-                    <option value="">{{ __('Selecciona un opción') }}</option>
-                    @if(count($meal_times) > 0)
-                    @foreach ($meal_times as $id => $name)
-                    <option value="{{ $id }}">{{ $name }}</option>
-                    @endforeach
-                    @endif
-                </select>
-                <x-input-error for="meal_time_id" class="mt-2" />
-            </div>
-            <div class="col-span-6 sm:col-span-4">
-                <x-label for="price" value="{{ __('Precio') }}" />
-                <x-input id="price" type="text" class="mt-1 block w-full" wire:model.defer="meal.price" />
-                <x-input-error for="price" class="mt-2" />
+                <x-label for="email" value="{{ __('Correo electrónico') }}" />
+                <x-input id="email" type="email" class="mt-1 block w-full" wire:model.defer="user.email" />
+                <x-input-error for="email" class="mt-2" />
             </div>
         </x-slot>
 
         <x-slot name="footer">
-            <x-secondary-button wire:click="$set('confirmingMealAdd', false)" wire:loading.attr="disabled">
+            <x-secondary-button wire:click="$set('confirmingUserAdd', false)" wire:loading.attr="disabled">
                 {{ __('Cancelar') }}
             </x-secondary-button>
 
-            <x-danger-button class="ml-3" wire:click="saveMeal({{ $confirmingMealDeletion }})" wire:loading.attr="disabled">
+            <x-danger-button class="ml-3" wire:click="saveUser({{ $confirmingUserDeletion }})" wire:loading.attr="disabled">
                 {{ __('Guardar') }}
             </x-danger-button>
         </x-slot>

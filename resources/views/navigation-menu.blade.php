@@ -15,11 +15,32 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Menús') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('breakfast') }}" :active="request()->routeIs('breakfast')">
+                        {{ __('Desayuno') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('lunch') }}" :active="request()->routeIs('lunch')">
+                        {{ __('Almuerzo') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('snacks') }}" :active="request()->routeIs('snacks')">
+                        {{ __('Merienda') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('others') }}" :active="request()->routeIs('others')">
+                        {{ __('Otros') }}
+                    </x-nav-link>
                     @role('super-admin')
                     <x-nav-link href="{{ route('meals') }}" :active="request()->routeIs('meals')">
                         {{ __('Comidas') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('users') }}" :active="request()->routeIs('users')">
+                        {{ __('Usuarios') }}
+                    </x-nav-link>
+                    <x-nav-link href="{{ route('orders') }}" :active="request()->routeIs('orders')">
+                        {{ __('Ordenes') }}
+                    </x-nav-link>
                     @endrole
+                    <x-nav-link href="{{ route('billings') }}" :active="request()->routeIs('billings')">
+                        {{ __('Facturación') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -145,11 +166,32 @@
             <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Menú') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link href="{{ route('breakfast') }}" :active="request()->routeIs('breakfast')">
+                {{ __('Desayuno') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link href="{{ route('lunch') }}" :active="request()->routeIs('lunch')">
+                {{ __('Almuerzo') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link href="{{ route('snacks') }}" :active="request()->routeIs('snacks')">
+                {{ __('Merienda') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link href="{{ route('others') }}" :active="request()->routeIs('others')">
+                {{ __('Otros') }}
+            </x-responsive-nav-link>
             @role('super-admin')
             <x-responsive-nav-link href="{{ route('meals') }}" :active="request()->routeIs('meals')">
                 {{ __('Comidas') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link href="{{ route('users') }}" :active="request()->routeIs('users')">
+                {{ __('Usuarios') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link href="{{ route('orders') }}" :active="request()->routeIs('orders')">
+                {{ __('Ordenes') }}
+            </x-responsive-nav-link>
             @endrole
+            <x-responsive-nav-link href="{{ route('billings') }}" :active="request()->routeIs('billings')">
+                {{ __('Facturación') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
