@@ -22,7 +22,7 @@ class Lunches extends Component
     ];
 
     public function mount() {
-        $this->meals = Meal::where('meal_time_id', '=', '3')
+        $this->meals = Meal::where('meal_time_id', '=', '4')
             ->pluck("name", "id")
             ->toArray();
     }

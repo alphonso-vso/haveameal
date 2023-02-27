@@ -22,7 +22,7 @@ class Snacks extends Component
     ];
 
     public function mount() {
-        $this->meals = Meal::where('meal_time_id', '=', '3')
+        $this->meals = Meal::where('meal_time_id', '=', '5')
             ->pluck("name", "id")
             ->toArray();
     }

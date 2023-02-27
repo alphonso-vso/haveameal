@@ -5,10 +5,10 @@
             <p class="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-500">{{ __(' Almorzar es beneficioso para nuestra salud, aporta calorías, vitaminas, valores nutricionales que potenciarán tu energía.') }}</p>
             <div class="flex mx-auto border-2 border-sky-500 rounded overflow-hidden mt-6">
                 
-                <button class="py-1 px-4 focus:outline-none hover:bg-sky-500 hover:text-white transition ease-in-out duration-150">{{ __('Desayuno') }}</button>
-                <button class="py-1 px-4 bg-sky-500 text-white focus:outline-none hover:text-white transition ease-in-out duration-150">{{ __('Almuerzo') }}</button>
-                <button class="py-1 px-4 focus:outline-none hover:text-white transition ease-in-out duration-150">{{ __('Merienda') }}</button>
-                <button class="py-1 px-4 focus:outline-none hover:text-white transition ease-in-out duration-150">{{ __('Otros') }}</button>
+                <a href="/breakfast" class="py-1 px-4 focus:outline-none hover:bg-sky-500 hover:text-white transition ease-in-out duration-150">{{ __('Desayuno') }}</a>
+                <a href="/lunch" class="py-1 px-4 bg-sky-500 text-white focus:outline-none hover:text-white transition ease-in-out duration-150">{{ __('Almuerzo') }}</a>
+                <a href="/snacks" class="py-1 px-4 focus:outline-none hover:bg-sky-500 hover:text-white transition ease-in-out duration-150">{{ __('Merienda') }}</a>
+                <a href="/others" class="py-1 px-4 focus:outline-none hover:bg-sky-500 hover:text-white transition ease-in-out duration-150">{{ __('Otros') }}</a>
             </div>
 
             <div>
@@ -31,7 +31,7 @@
         <div class="flex flex-wrap -m-4">
             @foreach($lunchess as $lunch)
             <div class="p-4 xl:w-1/4 md:w-1/2 w-full">
-                <div class="h-full p-6 rounded-lg border-2 border-sky-500 flex flex-col relative overflow-hidden">
+                <div class="h-full p-6 rounded-lg border-2 border-sky-500 flex flex-col relative overflow-hidden bg-white">
                     <span class="bg-sky-500 text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl uppercase">{{ $lunch->day }}</span>
                     <h2 class="text-sm tracking-widest title-font mb-1 font-medium uppercase">{{ $lunch->meal }}</h2>
                     <h1 class="text-5xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
@@ -78,7 +78,7 @@
     <!-- Add Meal Confirmation Modal -->
     <x-dialog-modal wire:model="confirmingMealAdd">
         <x-slot name="title">
-            'Editar plato del día'
+            Editar almuerzo
         </x-slot>
 
         <x-slot name="content">
@@ -109,7 +109,7 @@
     <!-- Order Meal Confirmation Modal -->
     <x-dialog-modal wire:model="confirmingMealOrder">
         <x-slot name="title">
-            'Ordenar'
+            'Ordenar almuerzo'
         </x-slot>
 
         <x-slot name="content">

@@ -1,14 +1,14 @@
 <section class="text-gray-600 body-font overflow-hidden">
     <div class="container px-5 py-12 mx-auto">
         <div class="flex flex-col text-center w-full mb-20">
-            <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">{{ __('Almuerzo') }}</h1>
-            <p class="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-500">{{ __(' Almorzar es beneficioso para nuestra salud, aporta calorías, vitaminas, valores nutricionales que potenciarán tu energía.') }}</p>
-            <div class="flex mx-auto border-2 border-sky-500 rounded overflow-hidden mt-6">
+            <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">{{ __('Merienda') }}</h1>
+            <p class="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-500">{{ __('El descanso que necesitas para reponer energías en el trabajo, después o durante un día atareado. La excusa perfecta para tomarte unos minutos, respirar, relajarte y volver con más energía a tus tareas') }}</p>
+            <div class="flex mx-auto border-2 border-pink-500 rounded overflow-hidden mt-6">
                 
-                <button class="py-1 px-4 focus:outline-none hover:bg-sky-500 hover:text-white transition ease-in-out duration-150">{{ __('Desayuno') }}</button>
-                <button class="py-1 px-4 focus:outline-none hover:text-white transition ease-in-out duration-150">{{ __('Almuerzo') }}</button>
-                <button class="py-1 px-4 bg-sky-500 text-white focus:outline-none hover:text-white transition ease-in-out duration-150">{{ __('Merienda') }}</button>                
-                <button class="py-1 px-4 focus:outline-none hover:text-white transition ease-in-out duration-150">{{ __('Otros') }}</button>
+                <a href="/breakfast" class="py-1 px-4 focus:outline-none hover:bg-pink-500 hover:text-white transition ease-in-out duration-150">{{ __('Desayuno') }}</a>
+                <a href="/lunch" class="py-1 px-4 focus:outline-none hover:bg-pink-500 hover:text-white transition ease-in-out duration-150">{{ __('Almuerzo') }}</a>
+                <a href="/snacks" class="py-1 px-4 bg-pink-500 text-white focus:outline-none hover:text-white transition ease-in-out duration-150">{{ __('Merienda') }}</a>                
+                <a href="/others" class="py-1 px-4 focus:outline-none hover:bg-pink-500 hover:text-white transition ease-in-out duration-150">{{ __('Otros') }}</a>
             </div>
 
             <div>
@@ -31,8 +31,8 @@
         <div class="flex flex-wrap -m-4">
             @foreach($snackss as $snack)
             <div class="p-4 xl:w-1/4 md:w-1/2 w-full">
-                <div class="h-full p-6 rounded-lg border-2 border-sky-500 flex flex-col relative overflow-hidden">
-                    <span class="bg-sky-500 text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl uppercase">{{ $snack->day }}</span>
+                <div class="h-full p-6 rounded-lg border-2 border-pink-500 flex flex-col relative overflow-hidden bg-white">
+                    <span class="bg-pink-500 text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl uppercase">{{ $snack->day }}</span>
                     <h2 class="text-sm tracking-widest title-font mb-1 font-medium uppercase">{{ $snack->meal }}</h2>
                     <h1 class="text-5xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
                         <span>₡{{ $snack->price }}</span>
@@ -84,7 +84,7 @@
         <x-slot name="content">
             <div class="col-span-6 sm:col-span-4">
                 <x-label for="meal_id" value="{{ __('Plato') }}" />
-                <select wire:model.defer="snack.meal_id" id="meal_id" class="mt-1 block w-full border-gray-300 focus:border-sky-500 focus:ring-sky-500 rounded-md shadow-sm">
+                <select wire:model.defer="snack.meal_id" id="meal_id" class="mt-1 block w-full border-gray-300 focus:border-pink-500 focus:ring-pink-500 rounded-md shadow-sm">
                     <option value="">{{ __('Selecciona un opción') }}</option>
                     @if(count($meals) > 0)
                     @foreach ($meals as $id => $name)

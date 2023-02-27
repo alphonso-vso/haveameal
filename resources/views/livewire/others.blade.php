@@ -3,11 +3,11 @@
         <div class="flex flex-col text-center w-full mb-20">
             <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">{{ __('Otros') }}</h1>
             <p class="lg:w-2/3 mx-auto leading-relaxed text-base text-gray-500">{{ __('Para calmar un poco los antojos ') }}&#127852;</p>
-            <div class="flex mx-auto border-2 border-sky-500 rounded overflow-hidden mt-6">                
-                <button class="py-1 px-4 focus:outline-none hover:bg-sky-500 hover:text-white transition ease-in-out duration-150">{{ __('Desayuno') }}</button>
-                <button class="py-1 px-4 focus:outline-none hover:text-white transition ease-in-out duration-150">{{ __('Almuerzo') }}</button>
-                <button class="py-1 px-4 focus:outline-none hover:text-white transition ease-in-out duration-150">{{ __('Merienda') }}</button>
-                <button class="py-1 px-4 bg-sky-500 text-white focus:outline-none hover:text-white transition ease-in-out duration-150">{{ __('Otros') }}</button> 
+            <div class="flex mx-auto border-2 border-amber-500 rounded overflow-hidden mt-6">                
+                <button class="py-1 px-4 focus:outline-none hover:bg-amber-500 hover:text-white transition ease-in-out duration-150">{{ __('Desayuno') }}</button>
+                <button class="py-1 px-4 focus:outline-none hover:bg-amber-500 hover:text-white transition ease-in-out duration-150">{{ __('Almuerzo') }}</button>
+                <button class="py-1 px-4 focus:outline-none hover:bg-amber-500 hover:text-white transition ease-in-out duration-150">{{ __('Merienda') }}</button>
+                <button class="py-1 px-4 bg-amber-500 text-white focus:outline-none hover:text-white transition ease-in-out duration-150">{{ __('Otros') }}</button> 
             </div>
 
             <div>
@@ -30,8 +30,8 @@
         <div class="flex flex-wrap -m-4">
             @foreach($otherss as $other)
             <div class="p-4 xl:w-1/4 md:w-1/2 w-full">
-                <div class="h-full p-6 rounded-lg border-2 border-sky-500 flex flex-col relative overflow-hidden">
-                    <span class="bg-sky-500 text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl uppercase">{{ $other->day }}</span>
+                <div class="h-full p-6 rounded-lg border-2 border-amber-500 flex flex-col relative overflow-hidden">
+                    <span class="bg-amber-500 text-white px-3 py-1 tracking-widest text-xs absolute right-0 top-0 rounded-bl uppercase">{{ $other->day }}</span>
                     <h2 class="text-sm tracking-widest title-font mb-1 font-medium uppercase">{{ $other->meal }}</h2>
                     <h1 class="text-5xl text-gray-900 leading-none flex items-center pb-4 mb-4 border-b border-gray-200">
                         <span>₡{{ $other->price }}</span>
@@ -64,7 +64,7 @@
         <x-slot name="content">
             <div class="col-span-6 sm:col-span-4">
                 <x-label for="meal_id" value="{{ __('Plato') }}" />
-                <select wire:model.defer="other.meal_id" id="meal_id" class="mt-1 block w-full border-gray-300 focus:border-sky-500 focus:ring-sky-500 rounded-md shadow-sm">
+                <select wire:model.defer="other.meal_id" id="meal_id" class="mt-1 block w-full border-gray-300 focus:border-amber-500 focus:ring-amber-500 rounded-md shadow-sm">
                     <option value="">{{ __('Selecciona un opción') }}</option>
                     @if(count($meals) > 0)
                     @foreach ($meals as $id => $name)
