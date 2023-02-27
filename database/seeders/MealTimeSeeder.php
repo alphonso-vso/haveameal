@@ -14,6 +14,20 @@ class MealTimeSeeder extends Seeder
      */
     public function run(): void
     {
+        // Create N/A
+        DB::table('meal_times')->insert(
+            [
+                'name' => 'N/A',
+            ]
+        );
+        
+        // Create Additional
+        DB::table('meal_times')->insert(
+            [
+                'name' => 'Adicional',
+            ]
+        );
+
         // Create Breakfast
         DB::table('meal_times')->insert(
             [
@@ -24,7 +38,7 @@ class MealTimeSeeder extends Seeder
         // Create Lunch
         DB::table('meal_times')->insert(
             [
-                'name' => 'Lunch',
+                'name' => 'Almuerzo',
             ]
         );
 

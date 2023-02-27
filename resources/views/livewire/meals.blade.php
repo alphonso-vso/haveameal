@@ -48,12 +48,14 @@
                     <td class="px-6 py-3">₡{{ $meal->price }}</td>
                     <td class="px-6 py-3">{{ $meal->meal_time }}</td>
                     @role('super-admin')
-                    <td class="px-6 py-3">
-                        <a wire:click="confirmMealEdit({{ $meal->id }})" class="text-blue-500 hover:text-blue-700 mr-4 transition ease-in-out duration-150" href="#">{{ __('Actualizar') }}</a>
-                        <x-danger-button wire:click="confirmMealDeletion({{ $meal->id }})" wire:loading.attr="disabled">
-                            {{ __('Eliminar') }}
-                        </x-danger-button>
-                    </td>
+                        @if ($meal->meal_time_id !== 1 && $meal->meal_time_id !== 2)
+                        <td class="px-6 py-3">
+                            <a wire:click="confirmMealEdit({{ $meal->id }})" class="text-blue-500 hover:text-blue-700 mr-4 transition ease-in-out duration-150" href="#">{{ __('Actualizar') }}</a>
+                            <x-danger-button wire:click="confirmMealDeletion({{ $meal->id }})" wire:loading.attr="disabled">
+                                {{ __('Eliminar') }}
+                            </x-danger-button>
+                        </td>
+                        @endif
                     @endrole
                 </tr>
                 @endforeach
@@ -120,9 +122,9 @@
                 <select wire:model.defer="meal.meal_time_id" id="meal_time_id" class="mt-1 block w-full border-gray-300 focus:border-orange-500 focus:ring-orange-500 rounded-md shadow-sm">
                     <option value="">{{ __('Selecciona un opción') }}</option>
                     @if(count($meal_times) > 0)
-                    @foreach ($meal_times as $id => $name)
-                    <option value="{{ $id }}">{{ $name }}</option>
-                    @endforeach
+                        @foreach ($meal_times as $id => $name)
+                        <option value="{{ $id }}">{{ $name }}</option>
+                        @endforeach
                     @endif
                 </select>
                 <x-input-error for="meal_time_id" class="mt-2" />
@@ -139,7 +141,7 @@
                 {{ __('Cancelar') }}
             </x-secondary-button>
 
-            <x-danger-button class="ml-3" wire:click="saveMeal({{ $confirmingMealDeletion }})" wire:loading.attr="disabled">
+            <x-danger-button class="ml-3" wire:click="saveMeal({{ $confirmingMealAdd }})" wire:loading.attr="disabled">
                 {{ __('Guardar') }}
             </x-danger-button>
         </x-slot>

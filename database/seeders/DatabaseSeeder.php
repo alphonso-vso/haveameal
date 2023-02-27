@@ -37,6 +37,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             MealTimeSeeder::class,
             MealSeeder::class,
+            BreakfastSeeder::class,
+            LunchSeeder::class,
+            SnackSeeder::class,
+            OtherSeeder::class,
         ]);
     }
 }
